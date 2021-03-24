@@ -22,6 +22,7 @@
 <script type="module">
     import Scene from "../../../src/Core/Scene/Scene.js";
     import RenderEngine from "../../../src/Core/RenderEngine.js";
+    import Internal from "../../../src/Core/Render/Internal.js";
     import Node from "../../../src/Core/Node/Node.js";
     import Material from "../../../src/Core/Material/Material.js";
     import Vector3 from "../../../src/Core/Math3d/Vector3.js";
@@ -51,7 +52,7 @@
 
     // 环境纹理加载完再开始创建创建
     let radianceLoader = new RadianceLoader();
-    radianceLoader.loadHDR('../../Assets/Textures/hdr/newport_loft.hdr', imageData=>{
+    radianceLoader.loadHDR('../../Assets/Textures/hdr/inside.hdr', imageData=>{
         // 创建一个sky
         let sky = new SkyBox(scene, {id:'sky'});
         // 使用cubeMap作为天空盒材质
@@ -87,17 +88,23 @@
         rootNode.addChildren(dirLight);
 
         let giProbe = new GIProbe(scene, {id:'giProbe'});
-        giProbe.setRadius(10);
+        giProbe.setRadius(20);
         giProbe.setPositionFromXYZ(0, 5, 0);
         let envCapture = ProbeTools.bakeGIProbe(scene, giProbe, {resolute:128});
 
         // 添加一个渲染探头,将捕捉数据渲染出来
         let giProbeGeo = new Sphere(scene, {id:'giProbeGeo', radius:1});
         giProbeGeo.setLocalTranslation(giProbe.getPosition());
-        let giProbeMat = new Material(scene, {id:'giProbeMat', materialDef:MaterialDef.load('../../Scenes/EnvCaptureOutDef')});
+        let giProbeMat = new Material(scene, {id:'giProbeMat', materialDef:MaterialDef.parse(Internal.S_ENV_CAPTURE_OUT_DEF)});
         giProbeMat.setParam('envCaptureMap', envCapture.getPrefilterTextureCube());
         giProbeGeo.setMaterial(giProbeMat);
         rootNode.addChildren(giProbeGeo);
+
+        // 将烘焙环境光作为sky材质
+        sky.setMaterial(new Material(scene, {id:'giProbeMat', materialDef:MaterialDef.parse(Internal.S_ENV_CAPTURE_OUT_DEF)}));
+        sky.getMaterial().selectTechnology('EnvSky');
+        sky.getMaterial().setParam('envCaptureMap', envCapture.getPrefilterTextureCube());
+        sky.getMaterial().setParam('lod', new FloatVars().valueOf(4));
 
         let gltfLoader = new GLTFLoader();
         gltfLoader.setAssetsPath("../../../src/Core/Assets/MaterialDef/");
