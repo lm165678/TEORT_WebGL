@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>MetalMaterialTest</title>
+    <link rel="stylesheet" type="text/css" href="../../Assets/Htmls/Css/Base.css"/>
+    <script src="../../Assets/Htmls/Js/Infos.js"></script>
 </head>
 <body>
 <div style="width: 100%;height: 100%;position:fixed;left: 0px;top: 0px;">
@@ -34,6 +36,8 @@
     import RadianceLoader from "../../../src/Supp/RadianceLoader.js";
     import SkyBox from "../../../src/Core/Node/Sky/SkyBox.js";
     import Internal from "../../../src/Core/Render/Internal.js";
+
+    addInfos('金属工作流', '这个例子使用了经典的金属工作流以展示原理化材质的典型用法。在金属工作流中，通过BaseColor(基础色或反照度)，Metallic(金属度)，Roughness(粗糙度)控制物体的表面材质。');
 
 
     // 创建scene

@@ -14,6 +14,8 @@
             width: 50px;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="../../Assets/Htmls/Css/Base.css"/>
+    <script src="../../Assets/Htmls/Js/Infos.js"></script>
 </head>
 <body>
 <div style="width: 100%;height: 100%;position:fixed;left: 0px;top: 0px;">
@@ -42,6 +44,8 @@
     import SkyBox from "../../../src/Core/Node/Sky/SkyBox.js";
     import GLTFLoader from "../../../src/Supp/GLTFLoader.js";
     import Input from "../../../src/Core/InputControl/Input.js";
+
+    addInfos('环境光渲染', '该例子演示了仅在环境光下的间接光照与直接光的对比情况，请确保页面获取焦点，按下键盘C键关闭定向光以便查看间接光照效果，按下键盘O键开启定向光查看全局光照效果。');
 
 
     // 创建scene
@@ -113,13 +117,12 @@
             rootNode.addChildren(modelNode);
         }, {batch:true});
 
-        let input = Input.getInput(scene, {id:scene.getId()})
+        let input = Input.getInput(scene, {id:scene.getId()});
         input.on('keydown', (key)=>{
             if(key == Input.S_KEY_O){
                 dirLight.enable();
             }
             else if(key == Input.S_KEY_C){
-                console.log('ss');
                 dirLight.disable();
             }
         });
