@@ -7,7 +7,7 @@
 
 ![image](https://github.com/JohnLKkk/TEORT_WebGL/blob/raw/master/Screenshot/a.png)
 ![image](https://gitee.com/JoyClm/teort_-web-gl/raw/master/Screenshot/b.png)
-![image](https://gitee.com/JoyClm/teort_-web-gl/raw/master/Screenshot/c.jpg)
+![image](https://github.com/JohnLKkk/TEORT_WebGL/blob/raw/master/Screenshot/c.png)
 ![image](https://gitee.com/JoyClm/teort_-web-gl/raw/master/Screenshot/e.png)
 ![image](https://gitee.com/JoyClm/teort_-web-gl/raw/master/Screenshot/f.png)
 ![image](https://gitee.com/JoyClm/teort_-web-gl/raw/master/Screenshot/g.png)
